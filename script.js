@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Big Visual.png",
                 "Calculator.png",
                 "Loader.png",
-                "uxcollector.png"
+                "uxcollector.png",
+                "visuals.png"
             ],
             description: "A minimalist and clean design with a focus on usability and readability. It uses a muted color palette and simple typography to create a professional and straightforward user experience."
         },
@@ -23,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Big Visual.png",
                 "Calculator.png",
                 "Loader.png",
-                "uxcollector.png"
+                "uxcollector.png",
+                "visuals.png"
             ],
             description: "A vibrant and playful design that uses bright colors and bold graphics to create an engaging and energetic atmosphere. This style is perfect for brands that want to stand out and be remembered."
         },
