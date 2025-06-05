@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Optional: If you have any other files or folders to ignore, add them here.
+# For example, a node_modules folder if you were using Node.js:
+# node_modules/ 
