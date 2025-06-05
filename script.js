@@ -73,7 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const imageFilenames = directionData.images;
-        styleDescription.textContent = directionData.description;
+        
+        const descriptionParts = directionData.description.split('\n\n');
+        const title = descriptionParts.shift();
+        let descriptionHTML = `<h1>${title}</h1>`;
+        descriptionParts.forEach(p_text => {
+            if (p_text.startsWith('Вопросы для клиентов:')) {
+                descriptionHTML += `<p><strong>${p_text}</strong></p>`;
+            } else {
+                descriptionHTML += `<p>${p_text}</p>`;
+            }
+        });
+        styleDescription.innerHTML = descriptionHTML;
 
         if (!imageFilenames || imageFilenames.length === 0) {
             galleryContainer.innerHTML = `<p>No images found for ${direction}.</p>`;
