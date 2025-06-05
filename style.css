@@ -184,11 +184,14 @@ body.modal-open > *:not(.modal-overlay) {
     font-weight: 600;
 }
 
-/* Styles for Sounds section */
-.hidden {
+/* Utility class to hide sections */
+#gallery-container.hidden,
+#style-description.hidden,
+#sounds-container.hidden {
     display: none;
 }
 
+/* Styles for Sounds section */
 #sounds-container {
     display: flex;
     flex-wrap: wrap;
