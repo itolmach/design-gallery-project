@@ -9,14 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
             "Home.png",
             "Big Visual.png",
             "Calculator.png",
-            "Loader.png"
+            "Loader.png",
+            "uxcollector.png"
         ],
         FunTiffany: [
             "Intro.png",
             "Home.png",
             "Big Visual.png",
             "Calculator.png",
-            "Loader.png"
+            "Loader.png",
+            "uxcollector.png"
         ],
         CoolBeans: [
             "Intro.png",
