@@ -2,31 +2,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryContainer = document.getElementById('gallery-container');
     const directionSelector = document.getElementById('direction-selector');
     const currentDirectionTitle = document.getElementById('current-direction-title');
+    const styleDescription = document.getElementById('style-description');
 
     const designDirections = {
-        BoringPlush: [
-            "Intro.png",
-            "Home.png",
-            "Big Visual.png",
-            "Calculator.png",
-            "Loader.png",
-            "uxcollector.png"
-        ],
-        FunTiffany: [
-            "Intro.png",
-            "Home.png",
-            "Big Visual.png",
-            "Calculator.png",
-            "Loader.png",
-            "uxcollector.png"
-        ],
-        CoolBeans: [
-            "Intro.png",
-            "Home.png",
-            "Big Visual.png",
-            "Calculator.png",
-            "Loader.png"
-        ]
+        BoringPlush: {
+            images: [
+                "Intro.png",
+                "Home.png",
+                "Big Visual.png",
+                "Calculator.png",
+                "Loader.png",
+                "uxcollector.png"
+            ],
+            description: "A minimalist and clean design with a focus on usability and readability. It uses a muted color palette and simple typography to create a professional and straightforward user experience."
+        },
+        FunTiffany: {
+            images: [
+                "Intro.png",
+                "Home.png",
+                "Big Visual.png",
+                "Calculator.png",
+                "Loader.png",
+                "uxcollector.png"
+            ],
+            description: "A vibrant and playful design that uses bright colors and bold graphics to create an engaging and energetic atmosphere. This style is perfect for brands that want to stand out and be remembered."
+        },
+        CoolBeans: {
+            images: [
+                "Intro.png",
+                "Home.png",
+                "Big Visual.png",
+                "Calculator.png",
+                "Loader.png"
+            ],
+            description: "A modern and trendy design that combines stylish typography with high-quality imagery. It's designed to be cool, casual, and appealing to a younger, tech-savvy audience."
+        }
     };
 
     // --- IMPORTANT ---
@@ -42,9 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         galleryContainer.innerHTML = ''; // Clear existing images
         currentDirectionTitle.textContent = direction; // Update the title
 
-        const imageFilenames = designDirections[direction];
-        if (!imageFilenames || imageFilenames.length === 0) {
+        const directionData = designDirections[direction];
+        if (!directionData) {
             galleryContainer.innerHTML = `<p>No images found for ${direction}, or this direction is not defined.</p>`;
+            styleDescription.innerHTML = '';
+            return;
+        }
+
+        const imageFilenames = directionData.images;
+        styleDescription.textContent = directionData.description;
+
+        if (!imageFilenames || imageFilenames.length === 0) {
+            galleryContainer.innerHTML = `<p>No images found for ${direction}.</p>`;
             return;
         }
 
