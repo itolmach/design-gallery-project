@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Calculator.png",
                 "Loader.png",
                 "uxcollector.png",
-                "visuals.png"
+                "visuals.png",
+                "Calculator screen.png"
             ],
             description: "A minimalist and clean design with a focus on usability and readability. It uses a muted color palette and simple typography to create a professional and straightforward user experience."
         },
@@ -35,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Home.png",
                 "Big Visual.png",
                 "Calculator.png",
-                "Loader.png"
+                "Loader.png",
+                "Calculator2.png"
             ],
             description: "A modern and trendy design that combines stylish typography with high-quality imagery. It's designed to be cool, casual, and appealing to a younger, tech-savvy audience."
         }
