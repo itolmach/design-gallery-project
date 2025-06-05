@@ -182,4 +182,39 @@ body.modal-open > *:not(.modal-overlay) {
 #style-description strong {
     color: #ffffff;
     font-weight: 600;
+}
+
+/* Styles for Sounds section */
+.hidden {
+    display: none;
+}
+
+#sounds-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.sound-button {
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #555;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.sound-button:hover {
+    background-color: #444;
+    transform: translateY(-2px);
+}
+
+.sound-button:active {
+    background-color: #555;
+    transform: translateY(0);
 } 

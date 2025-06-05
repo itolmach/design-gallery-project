@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const directionSelector = document.getElementById('direction-selector');
     const currentDirectionTitle = document.getElementById('current-direction-title');
     const styleDescription = document.getElementById('style-description');
+    const soundsContainer = document.getElementById('sounds-container');
+
+    const soundFiles = [
+        "Cash.wav", "Click1.wav", "Click2.wav", "Intro.wav", "Notification.wav",
+        "Received.wav", "Sent.wav", "approvedL.wav", "approvedM.wav",
+        "approvedS.wav", "signing.wav", "tap.wav"
+    ];
 
     const designDirections = {
         BoringPlush: {
@@ -52,14 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- IMPORTANT ---
-    // This function constructs the path to the image.
-    // It now expects: images/DIRECTION_NAME/FILENAME.png
-    // For example: images/BoringPlush/Intro.png
     function getImagePath(direction, filename) {
         return `images/${direction}/${filename}`;
     }
-    // --- IMPORTANT ---
 
     function loadImages(direction) {
         galleryContainer.innerHTML = ''; // Clear existing images
@@ -112,12 +114,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    galleryContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('gallery-image')) {
-            const index = parseInt(event.target.dataset.index, 10);
-            openModal(index);
+    function loadSounds() {
+        soundsContainer.innerHTML = '';
+        soundFiles.forEach(filename => {
+            const button = document.createElement('button');
+            button.classList.add('sound-button');
+            button.textContent = filename.replace('.wav', '');
+            button.onclick = () => {
+                const audio = new Audio(`sounds/${filename}`);
+                audio.play();
+            };
+            soundsContainer.appendChild(button);
+        });
+    }
+
+    function showSection(direction) {
+        if (direction === 'Sounds') {
+            styleDescription.classList.add('hidden');
+            galleryContainer.classList.add('hidden');
+            soundsContainer.classList.remove('hidden');
+            currentDirectionTitle.textContent = 'Sounds';
+        } else {
+            styleDescription.classList.remove('hidden');
+            galleryContainer.classList.remove('hidden');
+            soundsContainer.classList.add('hidden');
+            loadImages(direction);
         }
-    });
+    }
 
     let currentImageIndex = 0;
     let currentImageList = [];
@@ -199,16 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
             directionSelector.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            loadImages(selectedDirection);
+            showSection(selectedDirection);
         }
     });
 
+    loadSounds(); // Pre-load sound buttons
+
     const initialActiveButton = directionSelector.querySelector('button.active');
     if (initialActiveButton) {
-        loadImages(initialActiveButton.dataset.direction);
+        showSection(initialActiveButton.dataset.direction);
     } else if (directionSelector.firstElementChild && directionSelector.firstElementChild.tagName === 'BUTTON') {
         const firstButton = directionSelector.firstElementChild;
         firstButton.classList.add('active');
-        loadImages(firstButton.dataset.direction);
+        showSection(firstButton.dataset.direction);
     }
 }); 
