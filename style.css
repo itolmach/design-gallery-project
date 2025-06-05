@@ -93,4 +93,36 @@ main {
     text-align: center;
     padding: 10px;
     box-sizing: border-box;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Modal styles for image preview */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+/* Class to blur the background */
+body.modal-open > *:not(.modal-overlay) {
+    filter: blur(5px);
+    transition: filter 0.3s ease-in-out;
 } 

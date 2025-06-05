@@ -87,6 +87,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    galleryContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('gallery-image')) {
+            const modalOverlay = document.createElement('div');
+            modalOverlay.classList.add('modal-overlay');
+
+            const modalContent = document.createElement('img');
+            modalContent.classList.add('modal-content');
+            modalContent.src = event.target.src;
+
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+            document.body.classList.add('modal-open');
+
+            modalOverlay.addEventListener('click', () => {
+                document.body.removeChild(modalOverlay);
+                document.body.classList.remove('modal-open');
+            });
+        }
+    });
+
     directionSelector.addEventListener('click', (event) => {
         if (event.target.tagName === 'BUTTON') {
             const selectedDirection = event.target.dataset.direction;
