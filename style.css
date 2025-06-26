@@ -116,9 +116,12 @@ main {
 }
 
 .modal-content {
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    display: block;
+    background: #000;
 }
 
 /* Class to blur the background */
