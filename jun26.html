@@ -10,9 +10,12 @@
     <header>
         <h1>Design Directions Showcase (Jun 26)</h1>
         <nav id="direction-selector">
-            <button data-direction="AspirationalPro" class="active">AspirationalPro</button>
-            <button data-direction="ComfortPlush">ComfortPlush</button>
-            <button data-direction="InclusionRevolution">InclusionRevolution</button>
+            <button data-style="AspirationalPro" data-variant="Expanded" class="active">AspirationalPro Expanded</button>
+            <button data-style="AspirationalPro" data-variant="OnBrand">AspirationalPro OnBrand</button>
+            <button data-style="ComfortPlush" data-variant="Expanded">ComfortPlush Expanded</button>
+            <button data-style="ComfortPlush" data-variant="OnBrand">ComfortPlush OnBrand</button>
+            <button data-style="InclusionRevolution" data-variant="Expanded">InclusionRevolution Expanded</button>
+            <button data-style="InclusionRevolution" data-variant="OnBrand">InclusionRevolution OnBrand</button>
         </nav>
         <nav id="date-selector">
             <a href="index.html">Home</a> |
@@ -20,7 +23,7 @@
         </nav>
     </header>
     <main>
-        <h2 id="current-direction-title">AspirationalPro</h2>
+        <h2 id="current-direction-title">AspirationalPro Expanded</h2>
         <div id="gallery-container">
             <!-- Images will be loaded here by JavaScript -->
         </div>
@@ -47,16 +50,11 @@
                 fallback: 'images/jun26/InclusionRevolution/OnBrand',
             }
         };
-        function loadImages(direction) {
+        function loadImages(style, variant) {
             galleryContainer.innerHTML = '';
-            currentDirectionTitle.textContent = direction;
-            const dir = designDirections[direction];
-            // Try Expanded first, then OnBrand
-            fetch(dir.path).then(() => {
-                displayImages(dir.path);
-            }).catch(() => {
-                displayImages(dir.fallback);
-            });
+            currentDirectionTitle.textContent = `${style} ${variant}`;
+            const folder = `images/jun26/${style}/${variant}`;
+            displayImages(folder);
         }
         function displayImages(folder) {
             const baseNames = [
@@ -113,11 +111,13 @@
             if (e.target.tagName === 'BUTTON') {
                 document.querySelectorAll('#direction-selector button').forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
-                loadImages(e.target.dataset.direction);
+                const style = e.target.getAttribute('data-style');
+                const variant = e.target.getAttribute('data-variant');
+                loadImages(style, variant);
             }
         });
         // Initial load
-        loadImages('AspirationalPro');
+        loadImages('AspirationalPro', 'Expanded');
     </script>
 </body>
 </html> 
