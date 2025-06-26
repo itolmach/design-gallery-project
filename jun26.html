@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Directions Gallery - Jun 26</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Design Directions Showcase (Jun 26)</h1>
+        <nav id="direction-selector">
+            <button data-direction="AspirationalPro" class="active">AspirationalPro</button>
+            <button data-direction="ComfortPlush">ComfortPlush</button>
+            <button data-direction="InclusionRevolution">InclusionRevolution</button>
+        </nav>
+        <nav id="date-selector">
+            <a href="index.html">Home</a> |
+            <a href="jun6/index.html">Jun 6</a>
+        </nav>
+    </header>
+    <main>
+        <h2 id="current-direction-title">AspirationalPro</h2>
+        <div id="gallery-container">
+            <!-- Images will be loaded here by JavaScript -->
+        </div>
+    </main>
+    <footer>
+        <hr>
+        <p>Design Directions Gallery &copy; 2024</p>
+    </footer>
+    <script>
+        const galleryContainer = document.getElementById('gallery-container');
+        const directionSelector = document.getElementById('direction-selector');
+        const currentDirectionTitle = document.getElementById('current-direction-title');
+        const designDirections = {
+            AspirationalPro: {
+                path: 'images/jun26/AspirationalPro/Expanded',
+                fallback: 'images/jun26/AspirationalPro/OnBrand',
+            },
+            ComfortPlush: {
+                path: 'images/jun26/ComfortPlush/Expanded',
+                fallback: 'images/jun26/ComfortPlush/OnBrand',
+            },
+            InclusionRevolution: {
+                path: 'images/jun26/InclusionRevolution/Expanded',
+                fallback: 'images/jun26/InclusionRevolution/OnBrand',
+            }
+        };
+        function loadImages(direction) {
+            galleryContainer.innerHTML = '';
+            currentDirectionTitle.textContent = direction;
+            const dir = designDirections[direction];
+            // Try Expanded first, then OnBrand
+            fetch(dir.path).then(() => {
+                displayImages(dir.path);
+            }).catch(() => {
+                displayImages(dir.fallback);
+            });
+        }
+        function displayImages(folder) {
+            const baseNames = [
+                'Big Visual', 'Calculator', 'Home', 'Intro', 'Loader'
+            ];
+            baseNames.forEach(base => {
+                const img = document.createElement('img');
+                img.alt = base;
+                img.classList.add('gallery-image');
+                img.src = `${folder}/${base}.png`;
+                img.srcset = `${folder}/${base}.png 1x, ${folder}/${base}@2x.png 2x`;
+                img.onerror = function() { this.style.display = 'none'; };
+                img.addEventListener('click', () => openModal(img.src, img.srcset, img.alt));
+                galleryContainer.appendChild(img);
+            });
+        }
+        function openModal(src, srcset, alt) {
+            // Create overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
+            modalOverlay.style.position = 'fixed';
+            modalOverlay.style.top = 0;
+            modalOverlay.style.left = 0;
+            modalOverlay.style.width = '100vw';
+            modalOverlay.style.height = '100vh';
+            modalOverlay.style.display = 'flex';
+            modalOverlay.style.justifyContent = 'center';
+            modalOverlay.style.alignItems = 'center';
+            modalOverlay.style.background = 'rgba(0,0,0,0.9)';
+            modalOverlay.style.zIndex = 1000;
+            // Create image
+            const modalImg = document.createElement('img');
+            modalImg.className = 'modal-content';
+            modalImg.src = src;
+            if (srcset) modalImg.srcset = srcset;
+            modalImg.alt = alt;
+            modalImg.style.maxWidth = '95vw';
+            modalImg.style.maxHeight = '95vh';
+            // Close on tap/click
+            modalOverlay.addEventListener('click', () => {
+                document.body.removeChild(modalOverlay);
+                document.body.classList.remove('modal-open');
+            });
+            modalImg.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.body.removeChild(modalOverlay);
+                document.body.classList.remove('modal-open');
+            });
+            modalOverlay.appendChild(modalImg);
+            document.body.appendChild(modalOverlay);
+            document.body.classList.add('modal-open');
+        }
+        directionSelector.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                document.querySelectorAll('#direction-selector button').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                loadImages(e.target.dataset.direction);
+            }
+        });
+        // Initial load
+        loadImages('AspirationalPro');
+    </script>
+</body>
+</html> 
